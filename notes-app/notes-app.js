@@ -4,11 +4,10 @@ const filters = {
     searchText: '',
 };
 
-renderNotes(notes, filters);
-
 // ID, Class
 document.querySelector('#create-note').addEventListener('click', (event) => {
     notes.push({
+        id: uuidv4(),
         title: '',
         body: '',
     });
@@ -26,3 +25,5 @@ document.querySelector('#search-text').addEventListener('input', (e) => {
 document.querySelector('#filter-by').addEventListener('change', (e) => {
     console.log(e.target.value);
 });
+
+renderNotes(notes, filters);

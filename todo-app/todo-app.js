@@ -13,6 +13,7 @@ document.querySelector('#new-todo').addEventListener('submit', (e) => {
     e.preventDefault();
     console.log(e.target.elements.text.value);
     todos.push({
+        id: uuidv4(),
         text: e.target.elements.text.value,
         completed: false,
     });
