@@ -29,10 +29,29 @@ const renderTodos = (todos, filter) => {
     div.innerHTML = '';
     div.appendChild(generateSummaryDOM(selectedTodos));
 
-    selectedTodos.forEach((todo) => {
+    todos.forEach((todo) => {
         const p = generateTodoDOM(todo);
         div.appendChild(p);
     });
+};
+
+// Remove todo with id
+const removeTodo = (id) => {
+    const todoIndex = todos.findIndex((todo) => {
+        return todo.id === id;
+    });
+
+    if (todoIndex > -1) {
+        todos.splice(todoIndex, 1);
+    }
+};
+
+// Checkbox Checked
+const toggleTodo = (id, checkValue) => {
+    const todo = todos.find((todo) => {
+        return todo.id === id;
+    });
+    todo.completed = !todo.completed;
 };
 
 // Get the DOM elements for an individual note
@@ -44,6 +63,12 @@ const generateTodoDOM = (todo) => {
 
     // Setup Checkbox
     checkbox.setAttribute('type', 'checkbox');
+    checkbox.checked = todo.completed;
+    checkbox.addEventListener('change', (e) => {
+        toggleTodo(todo.id);
+        saveTodos(todos);
+        renderTodos(todos, filter);
+    });
     todoEl.appendChild(checkbox);
 
     // Setup the todo text
@@ -52,6 +77,11 @@ const generateTodoDOM = (todo) => {
 
     // Setup the remove button
     removeButton.textContent = 'x';
+    removeButton.addEventListener('click', () => {
+        removeTodo(todo.id);
+        saveTodos(todos);
+        renderTodos(todos, filter);
+    });
     todoEl.appendChild(removeButton);
 
     return todoEl;
