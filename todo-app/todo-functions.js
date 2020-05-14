@@ -1,9 +1,12 @@
+'use strict';
+
 // Fetch existing todos from localStorage
 const getSavedTodos = () => {
     const todosJSON = localStorage.getItem('todos');
-    if (todosJSON !== null) {
-        return JSON.parse(todosJSON);
-    } else {
+
+    try {
+        return todosJSON ? JSON.parse(todosJSON) : [];
+    } catch (e) {
         return [];
     }
 };
@@ -21,9 +24,7 @@ const renderTodos = (todos, filter) => {
             const search = todo.text.toLowerCase().includes(filter.searchText.toLowerCase());
             return hide && search;
         })
-        .filter((todo) => {
-            return !todo.completed;
-        });
+        .filter((todo) => !todo.completed);
 
     const div = document.querySelector('#todos');
     div.innerHTML = '';
@@ -37,9 +38,7 @@ const renderTodos = (todos, filter) => {
 
 // Remove todo with id
 const removeTodo = (id) => {
-    const todoIndex = todos.findIndex((todo) => {
-        return todo.id === id;
-    });
+    const todoIndex = todos.findIndex((todo) => todo.id === id);
 
     if (todoIndex > -1) {
         todos.splice(todoIndex, 1);
@@ -48,10 +47,10 @@ const removeTodo = (id) => {
 
 // Checkbox Checked
 const toggleTodo = (id, checkValue) => {
-    const todo = todos.find((todo) => {
-        return todo.id === id;
-    });
-    todo.completed = !todo.completed;
+    const todo = todos.find((todo) => todo.id === id);
+    if (todo) {
+        todo.completed = !todo.completed;
+    }
 };
 
 // Get the DOM elements for an individual note
