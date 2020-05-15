@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 const processData = () => {
     data = '1232132123';
