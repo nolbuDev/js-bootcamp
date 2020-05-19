@@ -2,7 +2,7 @@ const puzzleEl = document.querySelector('#puzzle');
 const guessesEl = document.querySelector('#guesses');
 const h1 = new Hangman('Cat', 3);
 puzzleEl.textContent = h1.getPuzzle();
-guessesEl.textContent = h1.remainingGuesses;
+guessesEl.textContent = h1.getStatusMessage();
 
 console.log(h1.getPuzzle());
 console.log(h1.remainingGuesses);
@@ -12,8 +12,7 @@ window.addEventListener('keypress', function (e) {
     const guess = String.fromCharCode(e.charCode);
     h1.makeGuess(guess);
     puzzleEl.textContent = h1.getPuzzle();
-    guessesEl.textContent = h1.remainingGuesses;
-    console.log(h1.status);
+    guessesEl.textContent = h1.getStatusMessage();
 
     // console.log(e.charCode);
     // console.log(e);
