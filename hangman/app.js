@@ -28,13 +28,30 @@ window.addEventListener('keypress', (e) => {
 // const puzzle = getPuzzle();
 // console.log(puzzle);
 
-getPuzzle((error, puzzle) => {
+getPuzzle("2", (error, puzzle) => {
     if (error) {
         console.log(`Error: ${error}`);
     } else {
         console.log(puzzle);
     }
 });
+
+getCountry("KR", (error, country) => {
+    if(error){
+        console.log('getCountry error', error)
+    } else {
+        console.log('getCountry success', country.name)
+    }
+})
+
+// ***************************************
+// Call Synchronous
+//****************************************
+// console.log('Do something else')
+// const puzzle = getPuzzleSync()
+// console.log(puzzle)
+// console.log('Do something else')
+// ***************************************
 
 // // Making an HTTP request
 // const request = new XMLHttpRequest();
