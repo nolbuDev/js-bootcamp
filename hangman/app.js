@@ -1,6 +1,6 @@
 // HTTP ( Hypertext Transfer Protocol )
 // Request - What do we want to do
-// Response -
+// Response - What was actually done
 const puzzleEl = document.querySelector('#puzzle');
 const guessesEl = document.querySelector('#guesses');
 const h1 = new Hangman('Cat', 3);
@@ -28,21 +28,39 @@ window.addEventListener('keypress', (e) => {
 // const puzzle = getPuzzle();
 // console.log(puzzle);
 
-getPuzzle("2", (error, puzzle) => {
-    if (error) {
-        console.log(`Error: ${error}`);
-    } else {
-        console.log(puzzle);
-    }
-});
+// getPuzzle('2', (error, puzzle) => {
+//     if (error) {
+//         console.log(`Error: ${error}`);
+//     } else {
+//         console.log(puzzle);
+//     }
+// });
 
-getCountry("KR", (error, country) => {
-    if(error){
-        console.log('getCountry error', error)
-    } else {
-        console.log('getCountry success', country.name)
-    }
-})
+getPuzzle('2').then(
+    (puzzle) => {
+        console.log(puzzle);
+    },
+    (err) => {
+        console.log(`Error: ${err}`);
+    },
+);
+
+// getCountry('KR', (error, country) => {
+//     if (error) {
+//         console.log('getCountry error', error);
+//     } else {
+//         console.log('getCountry success', country.name);
+//     }
+// });
+
+getCountry('KR').then(
+    (data) => {
+        console.log(`Success : ${data.name}`);
+    },
+    (err) => {
+        console.log(`Error is ${err}`);
+    },
+);
 
 // ***************************************
 // Call Synchronous
